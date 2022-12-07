@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\APIController;
+use App\Http\Controllers\DashboardController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/user/{id}/checkIn', [APIController::class, 'checkIn']);
+Route::get('/user/{id}/checkOut', [APIController::class, 'checkOut']);
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/', [DashboardController::class, 'index']);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
 
 Route::get('/forms-elements', function () {
