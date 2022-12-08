@@ -7,7 +7,7 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -24,7 +24,7 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
 
-        
+
 
                 <div class="card-body">
                   <h5 class="card-title">Employees <span></span></h5>
@@ -34,9 +34,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
-            
-
+                      <h6>{{ count($employees)}}</h6>
                     </div>
                   </div>
                 </div>
@@ -45,7 +43,7 @@
             </div><!-- End Sales Card -->
 
 
-      
+
 
             <!-- Recent Sales -->
             <div class="col-12">
@@ -72,41 +70,20 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Attendance Status</th>
                       </tr>
                     </thead>
                     <tbody>
+                        @foreach ($employees as $employee)
                       <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td><a href="users-profile">Brandon Jacob</a></td>
+                        <th scope="row"><a href="{{ route('profile.show', $employee->id) }}">{{ $employee->id }}</a></th>
+                        <td><a href="{{ route('profile.show', $employee->id) }}">{{ $employee->name }}</a></td>
 
-               
-                        <td><span class="badge bg-success">Approved</span></td>
+                        <td><span class="badge bg-success">Logged In</span></td>
                       </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td><a href="users-profile">Bridie Kessler</a></td>
-                      
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td><a href="users-profile">Ashleigh Langosh</a></td>
-                        
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td><a href="users-profile">Malik zain </a></td>
-                        
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td><a href="users-profile">Maikal jor</a></td>
-                        
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
+
+                        @endforeach
+
                     </tbody>
                   </table>
 
@@ -120,12 +97,12 @@
         </div><!-- End Left side columns -->
 
         <!-- Right side columns -->
-   
+
 
       </div>
     </section>
 
   </main>
-  
+
   <!-- End #main -->
 @endsection

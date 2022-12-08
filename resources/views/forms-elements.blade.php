@@ -7,7 +7,7 @@
       <h1>Form Elements</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
           <li class="breadcrumb-item">Forms</li>
           <li class="breadcrumb-item active">Elements</li>
         </ol>
@@ -198,7 +198,7 @@
                   </div>
                 </div>
 
-         
+
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Floating labels</label>
                   <div class="col-sm-10">
@@ -274,6 +274,6 @@
     </section>
 
   </main>
-  
+
   <!-- End #main -->
 @endsection

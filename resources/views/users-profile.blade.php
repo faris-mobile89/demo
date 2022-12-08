@@ -6,7 +6,7 @@
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
@@ -14,15 +14,24 @@
     </div><!-- End Page Title -->
 
     <section class="section profile">
+          @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
       <div class="row">
         <div class="col-xl-4">
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2>Kevin Anderson</h2>
-              <h3>Web Designer</h3>
+              <img src="{{ asset('assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+              <h2>{{$employee->name}}</h2>
+              <h3>Officer</h3>
             </div>
           </div>
 
@@ -53,13 +62,13 @@
               <div class="tab-content pt-2">
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-              
+
 
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="col-lg-9 col-md-8">{{$employee->name}}</div>
                   </div>
 
                   {{-- <div class="row">
@@ -70,12 +79,12 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                    <div class="col-lg-9 col-md-8">{{$employee->mobile}}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8">{{$employee->email}}</div>
                   </div>
 
                 </div>
@@ -84,18 +93,20 @@
                 <div class="tab-pane fade pt-3" id="profile-settings">
 
                   <!-- Settings Form -->
-                  <form>
-
+                <form method="POST" action="{{ route('profile.update', $employee->id) }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Work location</label>
                       <div class="col-md-8 col-lg-9">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">
-                            Changes made to your account
+                          <input class="form-check-input" type="checkbox" name = "home" id="home" {{$employee->work_location == 1 ? 'checked' : 'unchecked'}}>
+                          <label class="form-check-label" for="home">
+                            Allow work from home
                           </label>
                         </div>
-                  
+
                       </div>
                     </div>
 
@@ -111,30 +122,19 @@
                           <thead>
                             <tr>
                               <th scope="col">#</th>
-                              <th scope="col">First</th>
-                              <th scope="col">Last</th>
-                              <th scope="col">Handle</th>
+                              <th scope="col">Date Time</th>
+                              <th scope="col">Action</th>
                             </tr>
                           </thead>
                           <tbody>
+                            @foreach ($logs as $log)
                             <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
+
+                              <th scope="row">{{$log->id}}</th>
+                              <td>{{$log->created_at}}</td>
+                              <td> <span class="badge bg-{{ $log->action == 1 ? 'success' : 'danger'}}">{{ $log->action == 1 ? "Check In" : "Check Out"}}</span></td>
                             </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
+                             @endforeach
                           </tbody>
                         </table>
                 </div>
