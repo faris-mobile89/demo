@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\Logs;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,13 +13,40 @@ class APIController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function checkIn()
+    public function checkIn($id)
     {
-        return view('movie.create');
+
+        Logs::create([
+            'employee_id' => $id,
+            'action' => 1,
+            'time' => now()
+        ]);
+
+        return [
+            "status" => true,
+        ];
     }
 
-    public function checkOut()
+    public function checkOut($id)
     {
-        return view('movie.create');
+        Logs::create([
+            'employee_id' => $id,
+            'action' => 2,
+            'time' => now()
+        ]);
+
+        return [
+            "status" => true,
+        ];
     }
+
+    public function account($id)
+    {
+        $employee = Employee::findOrFail($id);
+
+        return $employee;
+    }
+
+
+
 }
