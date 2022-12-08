@@ -1,85 +1,37 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use App\Models\Employee;
+use App\Models\Logs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
+use Illuminate\Support\Facades\DB;
+
 class EmployeeController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        $logs = Logs::where(['employee_id' => $id])->orderBy('created_at', 'DESC')->get();
+
+        return view('users-profile', compact(['employee', 'logs']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $checked = $request->home;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        Employee::where('id', $id)->update([
+            'work_location' => $checked === 'on' ? 1 : 2,
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Employee $employee)
-    {
+        $employee = Employee::findOrFail($id);
 
-        //
-    }
+        $logs = Logs::where(['employee_id' => $id])->orderBy('created_at', 'DESC')->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Employee $employee)
-    {
-        //
+        return view('users-profile', compact(['employee', 'logs']));
     }
 }
