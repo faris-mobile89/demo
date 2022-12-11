@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use PhpParser\Node\Expr\Cast\Double;
 
 class APIController extends BaseController
 {
@@ -45,6 +46,14 @@ class APIController extends BaseController
         $employee = Employee::findOrFail($id);
 
         return $employee;
+    }
+
+    public function coordinates()
+    {
+        return [
+            "latitude" =>  23.00376000,
+            "longitude" => 55.28542000,
+        ];
     }
 
 

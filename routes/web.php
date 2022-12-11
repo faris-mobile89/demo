@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('coordinates', [APIController::class, 'coordinates']);
+
 Route::get('/user/{id}/checkIn', [APIController::class, 'checkIn']);
 Route::get('/user/{id}/checkOut', [APIController::class, 'checkOut']);
 Route::get('/user/{id}/account', [APIController::class, 'account']);
