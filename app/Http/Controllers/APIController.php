@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use PhpParser\Node\Expr\Cast\Double;
 
 class APIController extends BaseController
 {
@@ -51,8 +50,8 @@ class APIController extends BaseController
     public function coordinates()
     {
         return [
-            "latitude" =>  23.00376000,
-            "longitude" => 55.28542000,
+            "latitude" =>  "23.00376000",
+            "longitude" => "55.28542000",
         ];
     }
 
