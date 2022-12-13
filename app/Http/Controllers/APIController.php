@@ -50,8 +50,8 @@ class APIController extends BaseController
     public function coordinates()
     {
         return [
-            "latitude" =>  "23.00376000",
-            "longitude" => "55.28542000",
+            "latitude" =>  "25.046101259988102",
+            "longitude" => "55.20177894232937",
         ];
     }
 
