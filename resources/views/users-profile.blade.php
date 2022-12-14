@@ -131,7 +131,7 @@
                             <tr>
 
                               <th scope="row">{{$log->id}}</th>
-                              <td>{{$log->created_at}}</td>
+                              <td>{{$log->time}}</td>
                               <td> <span class="badge bg-{{ $log->action == 1 ? 'success' : 'danger'}}">{{ $log->action == 1 ? "Check In" : "Check Out"}}</span></td>
                             </tr>
                              @endforeach
