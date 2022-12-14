@@ -51,15 +51,15 @@ class APIController extends BaseController
     {
         //25.25645449037584, 55.4089075631927
 
-        // return [
-        //     "latitude" =>  "25.046101259988102",
-        //     "longitude" => "55.20177894232937",
-        // ];
-
         return [
-            "latitude" =>  "25.25645449037584",
-            "longitude" => "55.4089075631927",
+            "latitude" =>  "25.046101259988102",
+            "longitude" => "55.20177894232937",
         ];
+
+        // return [
+        //     "latitude" =>  "25.25645449037584",
+        //     "longitude" => "55.4089075631927",
+        // ];
     }
 
 
